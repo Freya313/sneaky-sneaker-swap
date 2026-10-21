@@ -26,7 +26,10 @@ export default function SignupCard({ session, defaultMode = 'signup' }) {
   const switchMode = (m) => { setMode(m); setError(''); setPassword(''); };
 
   const handleGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin },
+    });
     if (error) setError(error.message);
   };
 
