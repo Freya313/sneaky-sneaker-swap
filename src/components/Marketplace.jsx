@@ -182,7 +182,7 @@ export default function Marketplace({
         <p className="how-sub">Follow sellers to see their listings here — click "+ Follow" on any listing.</p>
       )}
 
-      <div className="feature-grid">
+      <div className="listing-grid">
         {filtered.map((l) => {
           const isSeller = session && (l.seller_id === session.user.id || l.user_id === session.user.id);
           const isBuyer  = session && boughtIds.has(l.id);
@@ -194,24 +194,28 @@ export default function Marketplace({
               key={l.id}
               role="button"
               tabIndex={0}
-              className="feature listing-card"
+              className="listing-card"
               onClick={() => setSelected({ ...l, isSeller, isBuyer, badge })}
               onKeyDown={(e) => e.key === 'Enter' && setSelected({ ...l, isSeller, isBuyer, badge })}
             >
               <div className="listing-photo-wrap">
-                {l.photos?.[0] && (
-                  <img src={l.photos[0]} alt={`${l.brand} ${l.model}`} style={{ width: '100%', borderRadius: 12 }} />
-                )}
+                {l.photos?.[0]
+                  ? <img src={l.photos[0]} alt={`${l.brand} ${l.model}`} className="listing-card-img" />
+                  : <div className="listing-card-img" style={{ background: 'var(--lavender-light)' }} />}
                 {badge    && <span className={`listing-status-badge badge-${l.status}`}>{badge}</span>}
                 {newBadge && <span className="listing-status-badge badge-new">NEW</span>}
                 <div className="fav-heart-wrap">
                   <FavouriteButton session={session} isFav={isFav} onToggle={() => onToggleFav(l.id)} />
                 </div>
               </div>
-              <h3 className="feature-title">{l.brand} {l.model}</h3>
-              <p className="feature-text">{l.size_system} {l.size} · {l.condition} · {l.color}</p>
-              <p className="feature-text">€{l.price}</p>
-              <p className="feature-text">Pickup: {l.pickup_location}</p>
+              <div className="card-body">
+                <h3 className="card-title">{l.brand} {l.model}</h3>
+                <p className="card-meta">{l.size_system} {l.size} · {l.condition}</p>
+                <div className="card-footer">
+                  <span className="card-price">€{l.price}</span>
+                  <span className="card-location">{l.pickup_location}</span>
+                </div>
+              </div>
             </div>
           );
         })}

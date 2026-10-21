@@ -5,7 +5,7 @@ export default function Hero({ session }) {
     <section className="hero">
       <div className="hero-copy">
         <span className="badge">100% FREE · NO FEES · EVER</span>
-        <h1 className="hero-title">Welcome to the swap.</h1>
+        <h1 className="hero-title">Welcome to the <em className="hero-title-accent">swap.</em></h1>
         <p className="hero-lead">
           You wear your sneakers to lectures, parties and everything in between. Here you can
           trade, sell and buy them with other students. Free.
