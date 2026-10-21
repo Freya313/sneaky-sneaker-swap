@@ -1582,3 +1582,61 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; }
 .modal-title  { margin: 0 0 10px; font: 700 18px var(--sans); }
 .modal-body   { margin: 0 0 12px; font: 400 14px var(--sans); line-height: 1.55; }
 .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+/* ── Auth tabs (sign up / log in toggle) ─────────────────────────────── */
+.auth-tabs {
+  display: flex;
+  background: var(--lavender-light);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.auth-tab {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font: 600 14px var(--sans);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.auth-tab--active {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+/* ── Password field with show/hide toggle ────────────────────────────── */
+.pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pw-wrap .field {
+  padding-right: 44px;
+  width: 100%;
+}
+.pw-toggle {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+}
+.pw-toggle:hover { color: var(--ink); }
+
+.forgot-link {
+  display: block;
+  text-align: center;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}

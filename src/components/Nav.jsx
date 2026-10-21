@@ -62,7 +62,10 @@ export default function Nav({
             />
           </>
         ) : (
-          <a href="#signup" className="pill-btn" onClick={handleHomeAnchor}>Sign up free</a>
+          <>
+            <a href="#signup" className="nav-link" onClick={handleHomeAnchor}>Log in</a>
+            <a href="#signup" className="pill-btn" onClick={handleHomeAnchor}>Sign up free</a>
+          </>
         )}
       </div>
     </nav>
