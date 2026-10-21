@@ -55,7 +55,7 @@ export default function Marketplace({
   session, favIds, onToggleFav, followIds, onToggleFollow,
   savedSearches, onSaveSearch, onDeleteSearch,
   pendingSearch, onPendingSearchCleared,
-  onStartChat,
+  onStartChat, onBuyNow,
 }) {
   const [listings,  setListings]  = useState([]);
   const [boughtIds, setBoughtIds] = useState(new Set());
@@ -231,6 +231,7 @@ export default function Marketplace({
           followIds={followIds}
           onToggleFollow={onToggleFollow}
           onStartChat={onStartChat}
+          onBuyNow={onBuyNow}
           onClose={() => setSelected(null)}
         />
       )}

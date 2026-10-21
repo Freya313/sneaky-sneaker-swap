@@ -37,6 +37,7 @@ export default function ListingDetail({
   favIds, onToggleFav,
   followIds, onToggleFollow,
   onStartChat,
+  onBuyNow,
   onClose,
 }) {
   const { badge, isSeller, isBuyer } = listing;
@@ -79,12 +80,14 @@ export default function ListingDetail({
         followIds={followIds}
         onToggleFollow={onToggleFollow}
         onStartChat={onStartChat}
+        onBuyNow={onBuyNow}
         onClose={() => setInner(null)}
       />
     );
   }
 
   const canMessage = session && !isSeller && (listing.status === 'active' || listing.status === 'reserved');
+  const canBuy     = session && !isSeller && listing.status === 'active';
 
   return (
     <div className="listing-overlay" onClick={onClose}>
@@ -124,7 +127,13 @@ export default function ListingDetail({
         {/* ── contact buttons ── */}
         {canMessage && (
           <div className="listing-contact-row">
-            <button type="button" className="primary-btn"
+            {canBuy && (
+              <button type="button" className="primary-btn buy-now-btn"
+                onClick={() => { onClose(); onBuyNow?.(listing); }}>
+                Buy now · €{listing.price}
+              </button>
+            )}
+            <button type="button" className="follow-btn"
               onClick={() => { onClose(); onStartChat?.(listing, false); }}>
               Ask seller
             </button>

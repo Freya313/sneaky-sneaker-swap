@@ -10,7 +10,8 @@ import Marketplace from './components/Marketplace.jsx';
 import MyFavourites from './components/MyFavourites.jsx';
 import InboxScreen from './components/InboxScreen.jsx';
 import ChatScreen from './components/ChatScreen.jsx';
-import ActivityBell from './components/ActivityBell.jsx';
+import CheckoutScreen from './components/CheckoutScreen.jsx';
+import OrderScreen from './components/OrderScreen.jsx';
 import { supabase } from './lib/supabase.js';
 
 export default function App() {
@@ -25,6 +26,8 @@ export default function App() {
   const [chatOpenOffer, setChatOpenOffer]           = useState(false);
   const [inboxUnreadCount, setInboxUnreadCount]     = useState(0);
   const [activityNotifs, setActivityNotifs]         = useState([]);
+  const [checkoutListing, setCheckoutListing]       = useState(null);
+  const [orderId, setOrderId]                       = useState(null);
 
   // ── auth ──────────────────────────────────────────────
   useEffect(() => {
@@ -237,11 +240,18 @@ export default function App() {
     dismissNotification(notification.id);
   };
 
+  // ── checkout / order ─────────────────────────────────
+  const startCheckout = (listing) => {
+    setCheckoutListing(listing);
+    setView('checkout');
+  };
+
   // ── shared props ──────────────────────────────────────
   const sharedProps = {
     session, favIds, onToggleFav: toggleFav,
     followIds, onToggleFollow: toggleFollow,
     onStartChat: startChat,
+    onBuyNow: startCheckout,
   };
   const marketplaceProps = {
     ...sharedProps,
@@ -296,6 +306,26 @@ export default function App() {
           session={session}
           openOffer={chatOpenOffer}
           onBack={() => setView('inbox')}
+        />
+      )}
+      {view === 'checkout' && checkoutListing && (
+        <CheckoutScreen
+          listing={checkoutListing}
+          session={session}
+          onBack={() => setView('marketplace')}
+          onOrderCreated={(order) => {
+            setOrderId(order.id);
+            setCheckoutListing(null);
+            setView('order');
+          }}
+        />
+      )}
+      {view === 'order' && orderId && (
+        <OrderScreen
+          orderId={orderId}
+          session={session}
+          onBack={() => setView('marketplace')}
+          onStartChat={startChat}
         />
       )}
 

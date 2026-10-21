@@ -61,7 +61,8 @@ export default function SellForm({ session, onPublished }) {
       }
 
       const { error: insertError } = await supabase.from('listings').insert({
-        user_id: session.user.id,
+        user_id:   session.user.id,
+        seller_id: session.user.id,
         brand: form.brand.trim(),
         model: form.model.trim(),
         size: Number(form.size),
