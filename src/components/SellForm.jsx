@@ -60,6 +60,8 @@ export default function SellForm({ session, onPublished }) {
         urls.push(supabase.storage.from('listing-photos').getPublicUrl(path).data.publicUrl);
       }
 
+      await supabase.from('profiles').upsert({ id: session.user.id }, { onConflict: 'id' });
+
       const { error: insertError } = await supabase.from('listings').insert({
         user_id:   session.user.id,
         seller_id: session.user.id,
