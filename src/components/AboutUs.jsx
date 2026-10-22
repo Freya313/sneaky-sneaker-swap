@@ -1,13 +1,16 @@
 const values = [
   {
+    emoji: '🎓',
     title: 'Students first',
     text: 'Built by students, for students. Every feature starts with what you actually need on campus.',
   },
   {
+    emoji: '🤝',
     title: 'Fair trades',
     text: 'Honest listings with clear sizes and conditions, so you know exactly what you get.',
   },
   {
+    emoji: '🌱',
     title: 'Less waste',
     text: 'Every swapped pair is one less pair in the bin and one less new pair shipped across the world.',
   },
@@ -17,7 +20,7 @@ export default function AboutUs() {
   return (
     <section id="about" className="about">
       <div className="about-intro">
-        <h2 className="about-title">About us</h2>
+        <h2 className="about-title">👟 About us</h2>
         <div className="about-copy">
           <p className="about-lead">
             We're CIUP students too. We started Sneaky Sneaker Swap because great pairs sit unworn
@@ -33,7 +36,7 @@ export default function AboutUs() {
       <div className="values">
         {values.map((v) => (
           <div key={v.title} className="value">
-            <h3 className="value-title">{v.title}</h3>
+            <h3 className="value-title">{v.emoji} {v.title}</h3>
             <p className="value-text">{v.text}</p>
           </div>
         ))}
